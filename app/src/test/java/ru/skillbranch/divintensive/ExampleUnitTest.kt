@@ -5,8 +5,11 @@ import org.junit.Test
 import org.junit.Assert.*
 import ru.skillbranch.divintensive.extensions.TimesUnits
 import ru.skillbranch.divintensive.extensions.add
+import ru.skillbranch.divintensive.extensions.humanizeDiff
 import ru.skillbranch.divintensive.models.User
 import ru.skillbranch.divintensive.utils.Utils
+import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.*
 
 /**
@@ -70,5 +73,12 @@ class ExampleUnitTest {
 
         println(Utils.transliteration("Иванов Сергей"))
         println(Utils.transliteration("Петров Александр", "_"))
+    }
+
+    @Test
+    fun test_data() {
+
+        // Date().humanizeDiff()
+         println("${Date().add(-455, TimesUnits.MINUTE).humanizeDiff()}")
     }
 }
