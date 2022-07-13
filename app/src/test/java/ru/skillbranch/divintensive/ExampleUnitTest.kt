@@ -6,7 +6,8 @@ import org.junit.Assert.*
 import ru.skillbranch.divintensive.extensions.TimesUnits
 import ru.skillbranch.divintensive.extensions.add
 import ru.skillbranch.divintensive.extensions.humanizeDiff
-import ru.skillbranch.divintensive.models.User
+import ru.skillbranch.divintensive.extensions.truncate
+import ru.skillbranch.divintensive.models.*
 import ru.skillbranch.divintensive.utils.Utils
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -81,4 +82,20 @@ class ExampleUnitTest {
         // Date().humanizeDiff()
          println("${Date().add(-455, TimesUnits.MINUTE).humanizeDiff()}")
     }
+
+    @Test
+    fun test_abstractFactory() {
+        val user = User.makeUser("Свиридов Александр")
+        val textMessage = BaseMessage.makeMessage(user, Chat("0"), payload = "Строка текста",
+            date = Date().add(-10, TimesUnits.MINUTE), type = "text")
+        val imageMessage = BaseMessage.makeMessage(user, Chat("0"), payload = "URL картинки", type = "image")
+
+        println(textMessage.formatMessage())
+        println(imageMessage.formatMessage())
+
+        val ss = "Мы пришли на Север, чтобы покорить этот холодный край!"
+        println("${ss.truncate(20)}")
+
+        }
+
 }

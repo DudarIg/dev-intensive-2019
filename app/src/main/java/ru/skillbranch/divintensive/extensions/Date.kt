@@ -18,7 +18,7 @@ fun Date.humanizeDiff(): String {
         in 0..1 -> "только что"
         in 2..45 -> "несколько секунд назад"
         in 46..75 -> "минуту назад"
-        in 76..45 * 60 -> {  mm = (times/60).toInt()
+        in 75..45 * 60 -> {  mm = (times/60).toInt()
                                 if (mm==2 || mm==3 || mm == 4) "$mm минуты назад" else "$mm минут назад" }
         in 45*60..75*60 -> "час назад"
         in 75*60..22*3600 -> {  mm = (times/3600).toInt()
@@ -51,4 +51,10 @@ fun Date.add(value: Int, units: TimesUnits = TimesUnits.SECOND): Date {
 
 enum class TimesUnits {
     SECOND, MINUTE, HOUR, DAY
+}
+
+fun String.truncate(value: Int = 16): String {
+    if (this.length <= value) return this
+    val strTrup = this.substring(0, value)
+    return  if (strTrup.substring(value-1, value) == " ") strTrup.dropLast(1)+"..." else strTrup + "..."
 }
