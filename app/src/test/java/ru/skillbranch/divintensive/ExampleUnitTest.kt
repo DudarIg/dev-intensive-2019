@@ -3,7 +3,10 @@ package ru.skillbranch.divintensive
 import org.junit.Test
 
 import org.junit.Assert.*
+import ru.skillbranch.divintensive.extensions.TimesUnits
+import ru.skillbranch.divintensive.extensions.add
 import ru.skillbranch.divintensive.models.User
+import ru.skillbranch.divintensive.utils.Utils
 import java.util.*
 
 /**
@@ -32,17 +35,40 @@ class ExampleUnitTest {
 
     @Test
     fun test_factory() {
-      val user = User.makeUser( "Александр Пушкин")
-//      val user2 = User.makeUser( "Михаил Лермонтов")
-//      val user3 = User.makeUser( "Лев Толстой")
-//      val user4 = User.makeUser( "Новиков")
-//      val user5 = User.makeUser( null)
-//        user.printMe()
+        val user = User.makeUser( "Александр Пушкин")
+        println(user)
+        val user1 = User("21","Алексей", "Сидоров", lastVisit = Date())
+        val user2 = user1.copy(lastName = "Сергей", firstName = "Лазарев", lastVisit = Date().add(10, TimesUnits.MINUTE))
+        val user3 = user1.copy(lastName = "Толстой", firstName = "Лев", lastVisit = Date().add(-2, TimesUnits.HOUR))
+        user1.printMe()
+        user2.printMe()
+        user3.printMe()
+
+        println("${Utils.toInitials(user1.firstName, user1.lastName)}")
+        println("${Utils.toInitials(user2.firstName, user2.lastName)}")
+        println("${Utils.toInitials(user3.firstName, user3.lastName)}")
+    }
+
+    @Test
+    fun test_initials() {
+        println("${Utils.toInitials("fdsdfs", "bvcvbc")}")
+        println("${Utils.toInitials("", "bvcvbc")}")
+        println("${Utils.toInitials("fdsdfs", "")}")
+        println("${Utils.toInitials("fdsdfs", null)}")
+        println("${Utils.toInitials(null,"fdsdfs")}")
+        println("${Utils.toInitials("","")}")
+        println("${Utils.toInitials(null,null)}")
+
+//        val user = User.makeUser( "Александр Пушкин")
+//        println(user)
+//        val user1 = User("21","Алексей", "Сидоров", lastVisit = Date())
+//        val user2 = user1.copy(lastName = "Сергей", firstName = "Лазарев", lastVisit = Date().add(10, TimesUnits.MINUTE))
+//        val user3 = user1.copy(lastName = "Толстой", firstName = "Лев", lastVisit = Date().add(-2, TimesUnits.HOUR))
+//        user1.printMe()
 //        user2.printMe()
 //        user3.printMe()
-//        user4.printMe()
-//        user5.printMe()
-        println(user)
 
+        println(Utils.transliteration("Иванов Сергей"))
+        println(Utils.transliteration("Петров Александр", "_"))
     }
 }

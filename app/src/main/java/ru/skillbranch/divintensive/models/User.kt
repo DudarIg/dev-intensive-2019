@@ -1,5 +1,7 @@
 package ru.skillbranch.divintensive.models
 
+
+import ru.skillbranch.divintensive.extensions.format
 import ru.skillbranch.divintensive.utils.Utils
 import java.util.*
 
@@ -32,14 +34,15 @@ data class User (
         Ура! Ура! Ура!!!        
     """.trimIndent()
 
+
     fun printMe(): Unit = println("""
                         id: $id  
-                        firstName: $firstName  
+                        firstName: $firstName
                         lastName: $lastName  
                         avatar: $avatar  
                         rating: $rating  
                         respect: $respect  
-                        lastVisit: $lastVisit  
+                        lastVisit: ${lastVisit?.format()}  
                         isOnline: $isOnline                  
                  """.trimIndent())
 
